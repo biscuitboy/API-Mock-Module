@@ -17,7 +17,19 @@ Contains the code to start up a Node server and serve all the API Mock JSONs
  ```
  
 #### To start up the server
+
  ```
- karma start
+ npm start
+ ```
+## How to access the module?
+
+#### After the server is up, navigate to the following URL
+
+ ```
+ http://localhost:8000/#/uploadMocks (If module is accessed in local machine)
  ```
  
+  ```
+ http://{{IP}}:8000/#/uploadMocks (Access it with corresponding IP , If module is accessed from other machine)
+ ```
+
