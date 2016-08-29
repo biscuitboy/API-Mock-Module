@@ -57,7 +57,6 @@ router.get('/projectList' , function(req,res){
     }); 
 });
 router.put('/saveProjectList' , function(req,res){
-    console.log(req.body);
     fs.writeFileSync(path.join(__dirname , "../" , "mockJsons" , "projects.json") , JSON.stringify(req.body) , 'utf-8');
         res.json({status:"SUCCESS"}); 
 });
@@ -74,14 +73,10 @@ router.post('/deleteMock' , function(req,res){
       
 });
 router.get('*' , function(req,res){
-    console.log(req.url);
     var arr = require("url").parse(req.url).pathname.split("/");
-    console.log(arr.toString());
     var length = arr.length;
     var projectName = arr[1];
-    console.log(projectName);
     var relativeUrl = arr[length-1];
-    console.log(relativeUrl);
     fs.readFile(path.join(__dirname , "../" , "mockJsons" , projectName, relativeUrl+ ".json") , function(error,response){
         if(error && error.code == "ENOENT"){
            res.status(404).send("REQUESTED JSON NOT FOUND"); 
