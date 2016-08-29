@@ -1,0 +1,36 @@
+{
+	"status" : "SUCCESS",
+	"companyInfoVOs" : [{
+			"companyName" : "0Number.",
+			"companyCode" : "0COMMUWIDV",
+			"emlMethod" : true,
+			"emplIDMethod" : false,
+			"promoMethod" : false,
+			"emplRegx" : "",
+			"adminInfo" : [{
+					"adminName" : "John Kenny",
+					"adminPhone" : "12347078",
+					"adminEmail" : "KENNY@GMAIL.COM"
+				}, {
+					"adminName" : "John Smith",
+					"adminPhone" : "1234567",
+					"adminEmail" : "JOHN@GMAIL.COM"
+				}
+			],
+			"domains" : "@CAPITALENG.CA;",
+			"maxPromoCardCount" : 0,
+			"REBLInd" : "N"
+		},{
+		
+			"companyName" : "9Alphabet Inc.",
+			"companyCode" : "ALCOMMUWIDV",
+			"emlMethod" : true,
+			"emplIDMethod" : false,
+			"promoMethod" : false,
+			"emplRegx" : "",
+			"adminInfo" : [],
+			"domains" : "@alpha.CA;",
+			"maxPromoCardCount" : 0,
+			"REBLInd" : "N"
+		}]
+}	

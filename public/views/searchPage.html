@@ -1,0 +1,77 @@
+
+<section class="col-xs-offset-3 searchPageSection">
+<!--<input type="text" ng-keyup="vm.searchFor()" ng-model="vm.searchModel" placeholder="Search for document"/>
+        <div ng-if="vm.filteredJson.length>0" ng-repeat="item in vm.filteredJson" ng-click="vm.openATab(item.url)">{{item.key}}</a></div>-->
+
+<div class="row col-xs-8 padding25">
+    <div class="text-heading">Mock Your Services Here !!!</div>
+    <div class="col-xs-12" style="margin-bottom:20px">
+        <div class="col-xs-offset-1 styled-select select-overlay select-bg-image" ng-if="!vm.addNew">
+        <select class="drop-down-select" ng-model="vm.projectSelected" ng-change="vm.getMockList()" ng-options="project.name for project in vm.projects track by project.name">
+            <option value="">Select a Project</option>
+        </select>
+            </div>
+        
+            <input type="text" class="col-xs-offset-1 styled-select pull-left" ng-if="vm.addNew" ng-model="vm.projectName">
+        
+         <button class="col-xs-offset-1 col-xs-4 btn btn-rogers margin-100" ng-click="vm.addNew = !vm.addNew;vm.projectSelected='';!vm.projectName || vm.saveProject()" ng-disabled="!vm.projectName && vm.addNew"><span ng-if="vm.addNew">Save</span><span ng-if="!vm.addNew">Add Project</span></button>
+            
+        </div>
+    <div class="col-xs-12 overflow-div" ng-if="vm.list.length>0 && vm.projectSelected">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th class="col-xs-6">No.</th>
+                    <th class="col-xs-6">Service JSON</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="service in vm.list" style="cursor:pointer">
+                    <td ng-click="vm.downloadJson(service)">{{$index+1}}</td>
+                    <td ng-click="vm.downloadJson(service)">{{service}}</td>
+                    <td ng-click="vm.downloadJson(service)"><button class="btn btn-link">Download</button></td>
+                    <td style="padding-top:13px" ng-click="vm.confirm(service)"><img height="12px" width="12px" src="/images/cross.png"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <form class="col-xs-12" name="mockForm" novalidate ng-submit="vm.submit()" ng-if="vm.projectSelected">
+        <!--<input class="col-xs-8 padding25" type="file" file-name="vm.files" ng-model="vm.files" accept="application/json"/>-->
+        <span class="col-xs-offset-1 col-xs-4 btn btn-rogers btn-file upload-bt"><span>Upload Mock Json file</span><input file-name="vm.files" type="file" ng-model="vm.files"  id="fileinput"></span>
+        <button class="col-xs-offset-1 col-xs-4 btn btn-rogers margin-100" type="submit" name="Submit the JSON">Submit</button>
+    </form>
+    <div class="col-xs-12">
+        <div class="btn btn-link col-xs-12" ng-click="vm.readMe=!vm.readMe" ng-if="!vm.readMe">Read Me</div>
+        <div class="btn btn-link col-xs-12" ng-click="vm.readMe=!vm.readMe" ng-if="vm.readMe">Hide</div>
+        <table class="table table-striped col-xs-12" ng-if="vm.readMe">
+            <tr>
+                <td class="col-xs-1">1.</td>
+                <td class="col-xs-10">Select the project from the dropdown,upload the JSON file and submit it to mock the service.</td>
+            </tr>
+            <tr>
+                <td class="col-xs-1">2.</td>
+                <td class="col-xs-10">If the project is not listed in the dropdown, go ahead and add project.</td>
+            </tr>
+            <tr>
+                <td class="col-xs-1">3.</td>
+                <td class="col-xs-10">The Json file which is uploaded should have the same name as that of service(API).</td>
+            </tr>
+            <tr>
+                <td class="col-xs-1">4.</td>
+                <td class="col-xs-10">While proxy passing the request in NGINX, URL will be in the following format <strong>http://{ip_of_node_server}:{port}/{projectname}</strong><br><br>Exp: <strong>http://10.96.90.204:8000/NAC.</strong></td>
+            </tr>
+            <tr>
+                <td class="col-xs-1">5.</td>
+                <td class="col-xs-10">The following entries should be made in NGINX conf file<br><br><strong><div>location ^~ /api/ {</div>
+                <div>proxy_pass http://10.96.90.204:8000/NAC/;</div>
+        <div>}</div></strong><br><br><strong><div>location ^~ /v1/ {</div>
+				<div>proxy_pass http://10.96.90.204:8000/NAC/v1/;</div>
+                    <div>}</div></strong></td>
+            </tr>
+        </table>
+        
+    </div>
+    </div>
+    
+    
+</section>
