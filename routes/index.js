@@ -3,6 +3,7 @@ var router = express.Router();
 var path = require("path");
 var fs= require("fs");
 var multer = require('multer');
+var request = require('request');
 var storage = multer.diskStorage({
     destination:function(req,file,cb){
         var newFolder = null;
@@ -57,6 +58,7 @@ router.get('/projectList' , function(req,res){
     }); 
 });
 router.put('/saveProjectList' , function(req,res){
+    console.log(req.body);
     fs.writeFileSync(path.join(__dirname , "../" , "mockJsons" , "projects.json") , JSON.stringify(req.body) , 'utf-8');
         res.json({status:"SUCCESS"}); 
 });
@@ -73,13 +75,42 @@ router.post('/deleteMock' , function(req,res){
       
 });
 router.get('*' , function(req,res){
+
     var arr = require("url").parse(req.url).pathname.split("/");
+   
     var length = arr.length;
     var projectName = arr[1];
+    
     var relativeUrl = arr[length-1];
+    
     fs.readFile(path.join(__dirname , "../" , "mockJsons" , projectName, relativeUrl+ ".json") , function(error,response){
         if(error && error.code == "ENOENT"){
-           res.status(404).send("REQUESTED JSON NOT FOUND"); 
+            arr = require("url").parse(req.url).pathname.split('/v1/');
+            console.log("inside");
+            relativeUrl = arr[1];
+            
+            fs.readFile(path.join(__dirname , "../" , "mockJsons" , "projects.json") , function(err , resp){
+            
+                if(err && err.code == "ENOENT"){
+                    res.status(500).send("INTERNAL SERVER ERROR");
+                }else{
+                    var json = JSON.parse(resp);
+                    var ip = null;
+                    /* Instead of iterating over the list here . we can move it to the place where we are saving the project and create additional file details.json which just contains the project name and ip.*/
+                    json.projectList.forEach(function(project){
+                        if(project.name.toLowerCase() == projectName.toLowerCase()){
+                            ip = project.ip;
+                        }
+                    });
+                    if(ip != null){
+                        request("http://" + ip + "/v1/" + relativeUrl).pipe(res);
+                    }else{
+                        res.status(404).send("IP NOT FOUND");
+                    }
+                } 
+            });
+            
+           //res.status(404).send("REQUESTED JSON NOT FOUND"); 
         }else{
            res.end(response); 
         }
@@ -93,7 +124,30 @@ router.post('*' , function(req,res){
     var relativeUrl = arr[length-1];
     fs.readFile(path.join(__dirname , "../" , "mockJsons" , projectName, relativeUrl+ ".json") , function(error,response){
         if(error && error.code == "ENOENT"){
-           res.status(404).send("REQUESTED JSON NOT FOUND"); 
+            arr = require("url").parse(req.url).pathname.split('/v1/');
+            relativeUrl = arr[1];
+            
+            fs.readFile(path.join(__dirname , "../" , "mockJsons" , "projects.json") , function(err , resp){
+            
+                if(err && err.code == "ENOENT"){
+                    res.status(500).send("INTERNAL SERVER ERROR");
+                }else{
+                    var json = JSON.parse(resp);
+                    var ip = null;
+                    /* Instead of iterating over the list here . we can move it to the place where we are saving the project and create additional file details.json which just contains the project name and ip.*/
+                    json.projectList.forEach(function(project){
+                        if(project.name.toLowerCase() == projectName.toLowerCase()){
+                            ip = project.ip;
+                        }
+                    });
+                    if(ip != null){
+                        request.post({uri:"http://" + ip + "/v1/" + relativeUrl , json:req.body}).pipe(res);;
+                    }else{
+                        res.status(404).send("IP NOT FOUND");
+                    }
+                } 
+            });
+            
         }else{
            res.end(response); 
         }
