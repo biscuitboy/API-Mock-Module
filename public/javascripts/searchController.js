@@ -68,6 +68,7 @@ function searchPageController($http,$window,$filter,ngDialog,$scope,$timeout){
            vm.projectSelected  = {"name" : vm.projectName};
           vm.getMockList();
           vm.projectName = "";
+          vm.ipAddress = "";
                } , 3000);
         },function(){});  
     }
