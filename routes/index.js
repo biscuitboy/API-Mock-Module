@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require("path");
-var fs= require("fs");
+var fs= require("fs-extra");
 var multer = require('multer');
 var request = require('request');
 var storage = multer.diskStorage({
@@ -74,6 +74,17 @@ router.post('/deleteMock' , function(req,res){
     });
       
 });
+router.post('/deleteProject' , function(req,res){
+    var projectName = req.body.projectName;
+    fs.remove(path.join(__dirname , "../" , "mockJsons" ,projectName),function(error , response){
+       if(error && error.code == "ENOENT"){
+           res.status(404).send("REQUESTED JSON NOT FOUND"); 
+        }else{
+            res.json({status:"success"});
+        }
+    });
+      
+}); 
 router.get('*' , function(req,res){
 
     var arr = require("url").parse(req.url).pathname.split("/");
