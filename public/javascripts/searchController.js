@@ -28,6 +28,8 @@ function searchPageController($http,$window,$filter,ngDialog,$scope,$timeout){
     vm.confirm = confirm;
     vm.addNew = false;
     vm.readMe = false;
+    vm.ipAddress = "";
+    vm.projectName = "";
     vm.sampleRead = "This is the content to read";
     vm.list = [];
     vm.projects = [];
@@ -36,6 +38,7 @@ function searchPageController($http,$window,$filter,ngDialog,$scope,$timeout){
     function saveProject(){
         var temp = {};
         temp.name = vm.projectName;
+        temp.ip = vm.ipAddress;
         arrayList.push(temp);
       $http({
             method:"put",
