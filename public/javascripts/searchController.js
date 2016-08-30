@@ -25,6 +25,7 @@ function searchPageController($http,$window,$filter,ngDialog,$scope,$timeout){
     vm.getMockList = getMockList;
     vm.projectList = projectList;
     vm.saveProject = saveProject;
+    vm.deleteProject = deleteProject; 
     vm.confirm = confirm;
     vm.addNew = false;
     vm.readMe = false;
@@ -140,6 +141,41 @@ function searchPageController($http,$window,$filter,ngDialog,$scope,$timeout){
         },function(error){});;
     }
     
+     function deleteProject(){
+      vm.projects.splice(vm.projects.indexOf(vm.projectSelected.name), 1);
+      var projName = vm.projectSelected.name;
+      $http({
+            method:"post",
+            url:"http://" + urlHost + "/deleteProject",
+            data:{"projectName":vm.projectSelected.name}
+        }).then(function(response){
+           
+          vm.message = projName + "project has been deleted successfully!!!";
+            var modalToOpen = {
+                    template: './views/popup.html',
+                    scope: $scope,
+                    controller: 'popupCtrl',
+                    controllerAs: 'vm',
+                    appendClassName: 'success-popup',
+                    showClose: false,
+                    disableAnimation: false,
+                    closeByDocument: false,
+                    closeByEscape: true,
+                    data : vm
+                }
+               ngDialog.open(modalToOpen);
+               $timeout(function(){
+                   ngDialog.close();
+                   $http({
+            method:"put",
+            url:"http://" + urlHost + "/saveProjectList",
+            data:{"projectList":vm.projects}
+        }).then(function(response){
+                       vm.list = [];
+                   },function(){});
+               } , 3000);
+        },function(){});
+    }
     
     function submit(){
         var files = vm.files;
