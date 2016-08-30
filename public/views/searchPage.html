@@ -20,7 +20,7 @@
             <input type="text" class="col-xs-3 pull-left input-style" ng-if="vm.addNew" ng-model="vm.projectName">
             <input type="text" class="col-xs-3 col-xs-offset-1 input-style" ng-if="vm.addNew" ng-model="vm.ipAddress">
         
-         <button class="col-xs-offset-1 col-xs-3 btn btn-rogers" ng-class="{'margin-100':!vm.addNew,'col-xs-4':!vm.addNew,'col-xs-3':vm.addNew}"ng-click="vm.addNew = !vm.addNew;vm.projectSelected='';vm.projectName.length>0 && vm.ipAddress.length>0 && vm.saveProject()" ng-disabled="(vm.projectName.length == 0 || vm.ipAddress.length==0) && vm.addNew"><span ng-if="vm.addNew">Save</span><span ng-if="!vm.addNew">Add Project</span></button>
+         <button class="col-xs-offset-1 col-xs-3 btn btn-red" ng-class="{'margin-100':!vm.addNew,'col-xs-4':!vm.addNew,'col-xs-3':vm.addNew}"ng-click="vm.addNew = !vm.addNew;vm.projectSelected='';vm.projectName.length>0 && vm.ipAddress.length>0 && vm.saveProject()" ng-disabled="(vm.projectName.length == 0 || vm.ipAddress.length==0) && vm.addNew"><span ng-if="vm.addNew">Save</span><span ng-if="!vm.addNew">Add Project</span></button>
             
         </div>
     <div class="col-xs-12 overflow-div" ng-if="vm.list.length>0 && vm.projectSelected">
@@ -43,8 +43,8 @@
     </div>
     <form class="col-xs-12" name="mockForm" novalidate ng-submit="vm.submit()" ng-if="vm.projectSelected">
         <!--<input class="col-xs-8 padding25" type="file" file-name="vm.files" ng-model="vm.files" accept="application/json"/>-->
-        <span class="col-xs-offset-1 col-xs-4 btn btn-rogers btn-file upload-bt"><span>Upload Mock Json file</span><input file-name="vm.files" type="file" ng-model="vm.files"  id="fileinput"></span>
-        <button class="col-xs-offset-1 col-xs-4 btn btn-rogers margin-100" type="submit" name="Submit the JSON">Submit</button>
+        <span class="col-xs-offset-1 col-xs-4 btn btn-red btn-file upload-bt"><span>Upload Mock Json file</span><input file-name="vm.files" type="file" ng-model="vm.files"  id="fileinput"></span>
+        <button class="col-xs-offset-1 col-xs-4 btn btn-red margin-100" type="submit" name="Submit the JSON">Submit</button>
     </form>
     <div class="col-xs-12">
         <div class="btn btn-link col-xs-12" ng-click="vm.readMe=!vm.readMe" ng-if="!vm.readMe">Read Me</div>
