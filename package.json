@@ -10,10 +10,16 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.13.4",
+    "fs-extra": "^0.30.0",
     "jade": "~1.11.0",
     "morgan": "~1.7.0",
+    "multer": "*",
+    "ng-dialog": "*",
     "serve-favicon": "~2.3.0",
-      "multer":"*",
-     "ng-dialog":"*"
+    "request": "^2.74.0"
+  },
+  "devDependencies": {
+    "fs-extra": "^0.30.0",
+    "request": "^2.74.0"
   }
 }
