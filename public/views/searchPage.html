@@ -12,15 +12,16 @@
         </select>
             </div>
             <div class="col-xs-12" ng-if="vm.addNew">
-            <div class="col-xs-3 pull-left"><h5>Project Name</h5></div>
-            <div class="col-xs-offset-1 col-xs-3"><h5>IP Address</h5></div>
+                <div class="col-xs-3 pull-left"><h5>Project Name</h5></div>
+                <div class="col-xs-offset-1 col-xs-3"><h5>IP Address</h5></div>
             <br><br>
             </div>
             
             <input type="text" class="col-xs-3 pull-left input-style" ng-if="vm.addNew" ng-model="vm.projectName">
             <input type="text" class="col-xs-3 col-xs-offset-1 input-style" ng-if="vm.addNew" ng-model="vm.ipAddress">
         
-         <button class="col-xs-offset-1 col-xs-3 btn btn-red" ng-class="{'margin-100':!vm.addNew,'col-xs-4':!vm.addNew,'col-xs-3':vm.addNew}"ng-click="vm.addNew = !vm.addNew;vm.projectSelected='';vm.projectName.length>0 && vm.ipAddress.length>0 && vm.saveProject()" ng-disabled="(vm.projectName.length == 0 || vm.ipAddress.length==0) && vm.addNew"><span ng-if="vm.addNew">Save</span><span ng-if="!vm.addNew">Add Project</span></button>
+         <button class="col-xs-offset-1 btn btn-red" ng-class="{'margin-100':!vm.addNew,'col-xs-2':!vm.addNew,'col-xs-3':vm.addNew}" ng-click="vm.addNew = !vm.addNew;vm.projectSelected='';vm.projectName.length>0 && vm.ipAddress.length>0 && vm.saveProject()" ng-disabled="(vm.projectName.length == 0 || vm.ipAddress.length==0) && vm.addNew"><span ng-if="vm.addNew">Save</span><span ng-if="!vm.addNew">Add Project</span></button>
+           <button class="col-xs-2 btn btn-red margin-10" ng-click="vm.deleteProject()" ng-if="vm.list.length > 0 && !vm.addNew"><span> Delete</span></button> 
             
         </div>
     <div class="col-xs-12 overflow-div" ng-if="vm.list.length>0 && vm.projectSelected">
