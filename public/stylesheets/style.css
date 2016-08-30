@@ -153,6 +153,15 @@ a {
     background-color: #ffffff;
     margin-left: 8%;
   }
+.input-style{
+    
+    height: 38px;
+    overflow: hidden;
+    border: 1px solid #939598;
+    border-radius: 7px;
+    background-color: #ffffff;
+    margin-left: 6%;
+}
 .select-bg-image{
     background: url(../images/drop_down_background.png) no-repeat right;
   }
