@@ -44,7 +44,9 @@ a {
         cursor: inherit;
         display: block;
      }
-
+.margin-10{
+    margin-left: 10px;
+}
 .btn-red{
   background-color:rgb(218, 41, 28);
   border:1px solid rgb(218, 41, 28);
